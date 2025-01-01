@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@theme {
+  /* Typography */
+  --font-sans: Inter, sans-serif;
+}
+
+:root {
+  /* Stylistic settings for Inter font*/
+  font-family: Inter, sans-serif;
+  font-feature-settings:
+    /*-------- NUMBERS --------*/
+    /* Tabular numbers */ "tnum" 1,
+    /* Slashed zero */ "zero" 1,
+    /* Alternate one */ "cv01" 1,
+    /* Flat-top three */ "cv09" 1,
+    /* Open four */ "cv02" 1,
+    /* Open six */ "cv03" 1,
+    /* Open nine */ "cv04" 1,
+    /*-------- LETTERS --------*/
+    /* Square punctuation */ "ss08" 1,
+    /* Discretionary ligatures */ "dlig" 1,
+    /* Simplified u */ "cv06" 1,
+    /* Capital G with spur */ "cv10" 1,
+    /* Single-story a */ "cv11" 1;
+    /* Compact t */ "cv13" 1,
+}
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: InterVariable, sans-serif;
+  }
+}
+/* Background gradient for image marquee */
+.bg-stripes {
+  background-image: repeating-linear-gradient(
+    125deg,
+    transparent,
+    transparent 6px,
+    #f1f2f4 6px,
+    #f1f2f4 7px
+  );
+}
+@media (prefers-color-scheme: dark) {
+  .bg-stripes {
+    background-image: repeating-linear-gradient(
+      125deg,
+      transparent,
+      transparent 6px,
+      #2b2b30 6px,
+      #18181b 7px
+    );
+  }
+}
+
+/* Styles for text reveal animation */
+.animate-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-text.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

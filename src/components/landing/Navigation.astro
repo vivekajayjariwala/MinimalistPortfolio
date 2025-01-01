@@ -1,0 +1,114 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+const navItems = [
+  { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
+  { name: "Activities", href: "#activities" },
+  { name: "About", href: "#about" },
+];
+---
+
+<Wrapper variant="base" class="sticky top-4 z-10 max-w-3xl pb-8">
+  <div>
+    <nav role="navigation" aria-label="Main navigation">
+      <ul
+        class="flex items-center gap-3 text-xs font-medium"
+        role="list"
+        id="nav"
+      >
+        {
+          navItems.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="py-2 px-3 bg-zinc-200 dark:bg-zinc-800 dark:text-white rounded-full duration-300 hover:bg-zinc-100 hover:text-black dark:hover:bg-zinc-900 dark:hover:text-white nav-link"
+                data-target={item.href.substring(1)}
+              >
+                {item.name}
+              </a>
+            </li>
+          ))
+        }
+        <button
+          id="back-to-top"
+          class="hidden py-2 px-3 ml-auto cursor-pointer rounded-full bg-zinc-200 dark:bg-zinc-700 dark:text-white duration-300 hover:bg-zinc-100 hover:text-black dark:hover:bg-zinc-700 dark:hover:text-white"
+        >
+          Back to Top
+        </button>
+      </ul>
+    </nav>
+  </div>
+</Wrapper>
+
+<script type="module">
+  // Select all navigation links and sections with an ID
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("section[id]");
+  const backToTopButton = document.getElementById("back-to-top"); // Button for scrolling back to the top
+
+  // Options for the Intersection Observer
+  const observerOptions = {
+    root: null, // Observe within the viewport
+    rootMargin: "0px", // No margin around the root
+    threshold: 0.5, // Trigger when 50% of the section is visible
+  };
+
+  // Intersection Observer to detect when sections are in view
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) { // If a section is in view
+        navLinks.forEach((link) => {
+          if (link.dataset.target === entry.target.id) { 
+            // Highlight the link corresponding to the visible section
+            link.classList.add(
+              "bg-black", // Black background for light mode
+              "text-white", // White text in light mode
+              "dark:bg-white", // White background for dark mode
+              "dark:text-black" // Black text in dark mode
+            );
+            // Remove classes for non-active links
+            link.classList.remove(
+              "bg-zinc-200", // Default light mode background
+              "dark:bg-zinc-800", // Default dark mode background
+              "text-black", // Default light mode text
+              "dark:text-white" // Default dark mode text
+            );
+          } else {
+            // Reset styles for non-active links
+            link.classList.remove(
+              "bg-black",
+              "text-white",
+              "dark:bg-white",
+              "dark:text-black"
+            );
+            link.classList.add(
+              "bg-zinc-200",
+              "dark:bg-zinc-800",
+              "text-black",
+              "dark:text-white"
+            );
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  // Attach the observer to each section
+  sections.forEach((section) => observer.observe(section));
+
+  // Show/Hide the "Back to Top" button based on scroll position
+  window.addEventListener("scroll", () => {
+    const halfwayPoint = document.documentElement.scrollHeight / 2; // Calculate halfway down the page
+    if (window.scrollY > halfwayPoint) {
+      backToTopButton.classList.remove("hidden"); // Show button when scrolled past halfway
+    } else {
+      backToTopButton.classList.add("hidden"); // Hide button when above halfway
+    }
+  });
+
+  // Smoothly scroll back to the top when the "Back to Top" button is clicked
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+</script>
+

@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+// Import All images you need
+import A from "../../images/a.png";
+import B from "../../images/b.png";
+import C from "../../images/c.png";
+import D from "../../images/d.png";
+import E from "../../images/e.png";
+const images = [
+  { src: A, alt: "Alt text for image A" },
+  { src: E, alt: "Alt text for image E" },
+  { src: B, alt: "Alt text for image B" },
+  { src: D, alt: "Alt text for image D" },
+  { src: C, alt: "Alt text for image C" },
+];
+---
+
+<div
+  class="marquee-container border-y py-12 lg:py-16 2xl:py-32 border-zinc-200 dark:border-zinc-700 bg-stripes overflow-hidden"
+>
+  <div class="marquee flex gap-2">
+    {
+      [...images, ...images].map((image, index) => (
+        <div class="marquee-item flex-none relative lg:aspect-[9/7] bg-zinc-100 dark:bg-zinc-800 shadow overflow-hidden w-100 rounded-lg lg:w-150 h-64 lg:h-96">
+          <Image
+            alt={image.alt}
+            class="absolute inset-0 h-full w-full object-cover"
+            src={image.src}
+          />
+        </div>
+      ))
+    }
+  </div>
+</div>
+<script type="module">
+  // Function to initialize and run the marquee animation
+  function setupMarquee() {
+    // Select the marquee container element
+    const marquee = document.querySelector(".marquee");
+
+    // Select all the individual marquee items
+    const marqueeItems = document.querySelectorAll(".marquee-item");
+
+    // Calculate the total width of the marquee items (including an 8px gap between items)
+    const totalWidth =
+      Array.from(marqueeItems) // Convert NodeList to Array for easier manipulation
+        .reduce(
+          (acc, item) => acc + item.offsetWidth + 8, // Accumulate the total width of items plus the gap
+          0 // Start the accumulation from 0
+        ) / 2; // Divide by 2 to make the marquee loop seamlessly (as items are duplicated)
+
+    let currentPosition = 0; // Initialize the current position of the marquee
+    let speed = 0.5; // Set the speed of the animation (lower values = slower, higher = faster)
+
+    // Function to animate the marquee
+    function animate() {
+      currentPosition -= speed; // Move the marquee left by the speed value
+      if (currentPosition <= -totalWidth) {
+        // Reset position if it reaches the end of the total width
+        currentPosition = 0;
+      }
+      marquee.style.transform = `translateX(${currentPosition}px)`; // Update the marquee position
+      requestAnimationFrame(animate); // Recursively call animate for smooth animation
+    }
+
+    animate(); // Start the animation loop
+  }
+
+  // Attach the setup function to the DOMContentLoaded event
+  // Ensures the DOM is fully loaded before trying to access elements
+  document.addEventListener("DOMContentLoaded", setupMarquee);
+</script>

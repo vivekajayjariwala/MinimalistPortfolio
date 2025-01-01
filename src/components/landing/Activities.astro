@@ -1,0 +1,91 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+const extracurriculars = [
+  {
+    name: "Ivey Technology Club",
+    position: "Co-President",
+    description: "Directed the largest technology club at Ivey, leading a team of 18 executives to organize events for a community of 250+ members.",
+    year: "April 2024 – Present",
+  },
+  {
+    name: "RBC Design Thinking Program",
+    position: "Design Thinking Fellow",
+    description: "Designed a mobile app prototype addressing urban sustainability, iterating through design sprints and pitching to RBC executives.",
+    year: "September 2022 – December 2022",
+  },
+  {
+    name: "Western AI",
+    position: "Senior Director of Projects",
+    description: "Led 3 teams of 18 developers to build AI projects showcased at CUCAI, Canada's largest undergraduate AI conference.",
+    year: "September 2022 – April 2024",
+  },
+  {
+    name: "Ivey Business Review",
+    position: "Author",
+    description: "Published an article proposing strategic changes for Estée Lauder to better align with evolving market trends.",
+    year: "January 2024 – April 2024",
+  },
+];
+---
+
+<section id="activities" class="scroll-mt-12">
+  <Wrapper variant="base" class="py-8 2xl:py-16 border-t">
+    <div class="w-full grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <Text
+          tag="h2"
+          variant="textMD"
+          class="font-medium text-zinc-800 dark:text-zinc-200"
+        >
+          Activities
+        </Text>
+        <Text
+          tag="p"
+          variant="textSM"
+          class="font-medium text-zinc-500 dark:text-zinc-400"
+        >
+          Some extracurriculars I've been involved with.
+        </Text>
+      </div>
+      <div class="lg:col-span-2 divide-y gap-4 flex flex-col divide-black/5">
+        {
+          extracurriculars.map((extracurricular, index) => (
+            <div class="pb-4">
+              <div class="flex items-center justify-between w-full">
+                <Text
+                  tag="h4"
+                  variant="textBase"
+                  class="text-zinc-800 dark:text-zinc-200 duration-300 flex items-center"
+                >
+                  {extracurricular.name}
+                </Text>
+              </div>
+              <Text
+                tag="h5"
+                variant="textSM"
+                class="text-zinc-600 dark:text-zinc-400 mt-1"
+              >
+                {extracurricular.position}
+              </Text>
+              <div class="text-zinc-500 text-pretty mt-2 dark:text-zinc-400 ">
+                <Text tag="p" variant="textSM">
+                  {extracurricular.description}
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-4">
+                  {extracurricular.year}
+                </Text>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>
+<script type="module">
+  import { setupTextAnimation } from "../scripts/textReveal.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    setupTextAnimation();
+  });
+</script>

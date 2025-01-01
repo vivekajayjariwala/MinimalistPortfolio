@@ -1,0 +1,102 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+
+const roles = [
+  {
+    company: "Bond Brand Loyalty",
+    title: "Software Engineering Intern",
+    years: "May 2024 — August 2024",
+    description: "Developed AI tools to automate data collection, machine learning workflows, and ad campaign brainstorming for global clients.",
+    link: "https://www.bondbrandloyalty.com",
+  },
+  {
+    company: "Elim Solutions",
+    title: "Software Developer Intern",
+    years: "May 2023 — August 2023",
+    description: "Built full stack web applications integrating Oracle NetSuite, improving workflows for mid-sized retail and fintech clients.",
+    link: "https://www.elimsolutions.ca",
+  },
+  {
+    company: "The Buckmaster Institute",
+    title: "Software Developer Intern",
+    years: "May 2022 — August 2022",
+    description: "Improved computer vision research accuracy with advanced image recognition algorithms and automated data validation scripts.",
+    link: "http://buckmaster.ca",
+  },
+  {
+    company: "Mornings With Matt Consulting",
+    title: "Business Development Intern",
+    years: "May 2022 — August 2022",
+    description: "Increased sales through a strategic service expansion and optimized marketing with data-driven insights.",
+    link: "https://mwmconsulting.org",
+  },
+];
+---
+
+<section id="experience" class="scroll-mt-12">
+  <Wrapper variant="base" class="py-8 2xl:py-16 border-t">
+    <div class="w-full grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <Text
+          tag="h2"
+          variant="textMD"
+          class="font-medium text-zinc-800 animate-text dark:text-zinc-200"
+        >
+          Experience
+        </Text>
+        <Text
+          tag="p"
+          variant="textSM"
+          class="font-medium text-zinc-500 animate-text dark:text-zinc-400"
+        >
+          A brief overview of my prior work experiences. 
+        </Text>
+      </div>
+      <div class="lg:col-span-2 divide-y gap-4 flex flex-col divide-black/5">
+        {
+          roles.map((role, index) => (
+            <a
+              href={role.link}
+              target="_blank"
+              class={`pb-4 group w-full animate-text`}
+              data-delay={index * 100}
+            >
+              <div class="flex items-center justify-between w-full">
+                <Text
+                  tag="h4"
+                  variant="textBase"
+                  class="text-zinc-800 group-hover:text-black dark:text-zinc-200 dark:group-hover:text-white duration-300 flex items-center"
+                >
+                  {role.company}
+                </Text>
+                <span class="ml-2 text-transparent group-hover:text-white duration-300">
+                  →
+                </span>
+              </div>
+              <div class="text-zinc-500 text-balance mt-2 dark:text-zinc-400">
+                <Text tag="p" variant="textSM">
+                  {role.title}
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-4">
+                  {role.description}
+                </Text>
+                <Text tag="p" variant="textSM" class="mt-4">
+                  {role.years}
+                </Text>
+
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+
+  <script type="module">
+    import { setupTextAnimation } from "../scripts/textReveal.js";
+    document.addEventListener("DOMContentLoaded", () => {
+      setupTextAnimation();
+    });
+  </script>
+</section>

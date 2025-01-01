@@ -1,0 +1,126 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+const projects = [
+  {
+    name: "Next Stop",
+    description: "A social platform for travelers to discover and share hidden gems around the world.",
+    launchYear: "2024",
+    link: "https://github.com/vivekajayjariwala/NextStop",
+    technologies: ["React", "Node.js", "Express", "MongoDB", "AWS", "Tailwind CSS"],
+  },
+    {
+    name: "Scaredy Cat",
+    description: "A 3D stealth game with physics interactions, environmental lighting, enemy AI behaviours, and virtual cameras.",
+    launchYear: "2024",
+    link: "https://github.com/vivekajayjariwala/ScaredyCat",
+    technologies: ["C#", "Unity"],
+  },
+  {
+    name: "Bond Brand Loyalty Machine Learning Challenge",
+    description: "Award-winning predictive model for analyzing and forecasting customer behavior patterns.",
+    launchYear: "2024",
+    link: "https://github.com/vivekajayjariwala/MachineLearningChallenge",
+    technologies: ["Python", "Scikit-learn", "NumPy", "Pandas", "TensorFlow"],
+  },
+  {
+    name: "Bulletin Board",
+    description: "Real-time collaborative workspace for teams to brainstorm and organize ideas together.",
+    launchYear: "2023",
+    link: "https://github.com/vivekajayjariwala/BulletinBoard",
+    technologies: ["Angular", "Node.js", "Express", "MongoDB", "Angular Material"],
+  },
+  {
+    name: "Battle of the Marauders",
+    description: "A 16-bit adventure game featuring turn-based combat and dynamic platforming mechanics.",
+    launchYear: "2023",
+    link: "https://github.com/vivekajayjariwala/BattleOfTheMarauders",
+    technologies: ["Python", "Pygame"],
+  },
+  {
+    name: "Fantasy League Manager",
+    description: "Comprehensive management system for organizing and tracking fantasy sports leagues.",
+    launchYear: "2023",
+    link: "https://github.com/vivekajayjariwala/FantasyLeagueManager",
+    technologies: ["Java", "Java DB", "Scene Builder", "JavaFX"],
+  },
+  {
+    name: "Riddles Emporium",
+    description: "Interactive community platform where users can create, solve, and discuss riddles.",
+    launchYear: "2023",
+    link: "https://github.com/vivekajayjariwala/RiddlesEmporium",
+    technologies: ["C#", "ASP .NET"],
+  },
+];
+---
+
+<section id="projects" class="scroll-mt-12">
+  <Wrapper variant="base" class="py-8 2xl:py-16 border-t">
+    <div class="w-full grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <Text
+          tag="h2"
+          variant="textMD"
+          class="font-medium text-zinc-800 dark:text-zinc-200"
+        >
+          Projects
+        </Text>
+        <Text tag="p" variant="textSM" class="font-medium text-zinc-500">
+          A collection of some of my projects that I created for fun.
+        </Text>
+      </div>
+      <div class="lg:col-span-2 divide-y gap-4 flex flex-col divide-black/5">
+        {
+          projects.map((product, index) => (
+            <a
+              href={product.link}
+              class={`pb-4 group w-full animate-text`}
+              target="_blank"
+              data-delay={index * 100}
+            >
+              <div class="flex items-center justify-between w-full">
+                <Text
+                  tag="h4"
+                  variant="textBase"
+                  class="text-zinc-80 group-hover:text-black dark:text-zinc-200 dark:group-hover:text-white duration-300 flex items-center"
+                >
+                  {product.name}
+                </Text>
+                <span class="ml-2 text-transparent group-hover:text-white duration-300">
+                  →
+                </span>
+              </div>
+              <div class="text-zinc-500 text-pretty mt-2 dark:text-zinc-400">
+                <Text tag="p" variant="textSM">
+                  {product.description}
+                </Text>
+                <div class="mt-2">
+                  {product.technologies.map((tech, techIndex) => (
+                    <span key={techIndex} class="inline-flex items-center mb-1 sm:mb-0">
+                      <span class="bg-gray-400 rounded-full px-2 py-1 text-xs text-gray-800">
+                        {tech}
+                      </span>
+                      {techIndex < product.technologies.length - 1 && (
+                        <span class="mx-1"></span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+                <Text tag="p" variant="textSM" class="mt-4">
+                  {product.launchYear}
+                </Text>
+                
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>
+<script type="module">
+  import { setupTextAnimation } from "../scripts/textReveal.js";
+  document.addEventListener("DOMContentLoaded", () => {
+    setupTextAnimation();
+  });
+</script>

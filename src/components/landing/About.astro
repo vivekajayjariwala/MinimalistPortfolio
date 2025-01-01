@@ -1,0 +1,44 @@
+---
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+---
+
+<section id="about" class="scroll-mt-12">
+  <Wrapper variant="base" class="py-8 2xl:py-16 border-t">
+    <div class="w-full grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div>
+        <Text
+          tag="h2"
+          variant="textBase"
+          class="font-medium text-zinc-800 animate-text dark:text-zinc-200"
+        >
+          About
+        </Text>
+        <Text
+          tag="p"
+          variant="textSM"
+          class="font-medium text-zinc-500 animate-text dark:text-zinc-400"
+        >
+          Welcome to my portfolio site!
+        </Text>
+      </div>
+      <div class="lg:col-span-2 gap-4 flex flex-col">
+        <div class="text-zinc-500 dark:text-zinc-400">
+          <Text tag="p" variant="textSM">
+            My passion for technology started at 12-years-old, when I built my own Batman video game. This first experience with coding sparked a love for creating and problem-solving that has stayed with me ever since.
+          </Text>
+
+          <Text tag="p" variant="textSM" class="mt-4">
+            Today, I’m drawn to tackling complex technical challenges, refining solutions through iteration, and building applications that drive meaningful impact.
+          </Text>
+
+          <Text tag="p" variant="textSM" class="mt-4">
+            Thanks for visiting my portfolio! Feel free to connect with me through any of my socials below.
+          </Text> 
+
+
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>
