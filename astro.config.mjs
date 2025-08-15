@@ -9,6 +9,6 @@ export default defineConfig({
    vite: {
     plugins: [tailwindcss()],
   },
-   site: 'https://yourdomain.com',
+   site: 'https://vivek-jariwala.netlify.app',
   integrations: [sitemap()]
 });
